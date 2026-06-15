@@ -12,7 +12,7 @@ export default function Navbar() {
     <nav className="bg-white shadow-sm border-b border-gray-200">
       <div className="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
         <NavLink to="/" className="text-lg font-bold text-cyan-600 tracking-tight">
-          Kriptografi
+          DigiMark
         </NavLink>
         <div className="flex gap-1">
           {links.map(({ to, label }) => (
