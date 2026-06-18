@@ -19,9 +19,9 @@ export default function Embed() {
     setError(null);
     setDownloadUrl(null);
 
-    if (!file) { setError('Please select an image'); return; }
+    if (!file) { setError('Pilih gambar terlebih dahulu'); return; }
     if (!form.owner_name || !form.copyright_id || !form.secret_key) {
-      setError('Owner name, Copyright ID, and Secret Key are required');
+      setError('Nama pemilik, ID Hak Cipta, dan Kunci Rahasia wajib diisi');
       return;
     }
 
@@ -69,10 +69,10 @@ export default function Embed() {
 
   return (
     <div className="max-w-xl mx-auto space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold text-gray-900">Embed Copyright</h1>
+      <div className="text-center sm:text-left">
+        <h1 className="text-2xl font-bold text-gray-900">Sisipkan Hak Cipta</h1>
         <p className="text-sm text-gray-500 mt-1">
-          Upload an image and enter your copyright information to embed it securely.
+          Unggah gambar dan masukkan informasi hak cipta untuk menyisipkannya secara aman.
         </p>
       </div>
 
@@ -81,10 +81,10 @@ export default function Embed() {
 
         <div className="space-y-4 bg-white rounded-xl p-6 shadow-sm border border-gray-100">
           {[
-            { label: 'Owner Name', field: 'owner_name', type: 'text', required: true },
-            { label: 'Copyright ID', field: 'copyright_id', type: 'text', required: true },
-            { label: 'Description', field: 'description', type: 'text', required: false },
-            { label: 'Secret Key', field: 'secret_key', type: 'password', required: true },
+            { label: 'Nama Pemilik', field: 'owner_name', type: 'text', required: true },
+            { label: 'ID Hak Cipta', field: 'copyright_id', type: 'text', required: true },
+            { label: 'Deskripsi', field: 'description', type: 'text', required: false },
+            { label: 'Kunci Rahasia', field: 'secret_key', type: 'password', required: true },
           ].map(({ label, field, type, required }) => (
             <div key={field}>
               <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -108,13 +108,13 @@ export default function Embed() {
 
         {downloadUrl && (
           <div className="bg-green-50 border border-green-200 rounded-lg px-4 py-3 text-sm text-green-700 space-y-2">
-            <p>Copyright data embedded successfully!</p>
+            <p>Data hak cipta berhasil disisipkan!</p>
             <button
               type="button"
               onClick={handleDownload}
               className="inline-flex items-center px-4 py-1.5 rounded-lg bg-green-600 text-white font-medium text-xs hover:bg-green-700 transition-colors"
             >
-              Download {downloadName}
+              Unduh {downloadName}
             </button>
           </div>
         )}
@@ -122,9 +122,9 @@ export default function Embed() {
         <button
           type="submit"
           disabled={loading}
-          className="w-full rounded-lg bg-cyan-500 text-white font-medium py-2.5 text-sm hover:bg-cyan-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          className="w-full rounded-lg bg-cyan-500 text-white font-medium py-2.5 text-sm hover:bg-cyan-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors shadow-sm"
         >
-          {loading ? 'Processing...' : 'Embed Copyright'}
+          {loading ? 'Memproses...' : 'Sisipkan Hak Cipta'}
         </button>
       </form>
     </div>

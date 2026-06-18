@@ -3,6 +3,7 @@ const { v4: uuidv4 } = require('uuid');
 const fs = require('fs-extra');
 const aesService = require('../services/aesService');
 const eofService = require('../services/eofService');
+const metadataService = require('../services/metadataService');
 
 async function embedCopyright(req, res) {
   try {
@@ -31,6 +32,12 @@ async function embedCopyright(req, res) {
     const outputPath = path.join(__dirname, '..', 'outputs', outputFilename);
 
     await eofService.embed(req.file.path, encryptedData, outputPath);
+
+    try {
+      await metadataService.embed(outputPath, encryptedData);
+    } catch (metaErr) {
+      console.warn('Metadata embed skipped:', metaErr.message);
+    }
 
     await fs.remove(req.file.path);
 

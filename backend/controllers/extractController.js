@@ -1,6 +1,7 @@
 const fs = require('fs-extra');
 const aesService = require('../services/aesService');
 const eofService = require('../services/eofService');
+const metadataService = require('../services/metadataService');
 
 async function extractCopyright(req, res) {
   try {
@@ -14,7 +15,21 @@ async function extractCopyright(req, res) {
       return res.status(400).json({ error: 'Missing required field: secret_key' });
     }
 
-    const encryptedData = await eofService.extract(req.file.path);
+    let encryptedData;
+
+    try {
+      encryptedData = await eofService.extract(req.file.path);
+    } catch (eofErr) {
+      try {
+        encryptedData = await metadataService.extract(req.file.path);
+        if (!encryptedData) {
+          throw new Error('No embedded data found in image (checked EOF and metadata)');
+        }
+      } catch (metaErr) {
+        await fs.remove(req.file.path);
+        return res.status(400).json({ error: metaErr.message });
+      }
+    }
 
     await fs.remove(req.file.path);
 

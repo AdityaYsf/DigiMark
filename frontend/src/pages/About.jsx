@@ -1,48 +1,51 @@
 export default function About() {
   return (
     <div className="max-w-2xl mx-auto space-y-8">
-      <div>
-        <h1 className="text-2xl font-bold text-gray-900">About This Project</h1>
+      <div className="text-center sm:text-left">
+        <h1 className="text-2xl font-bold text-gray-900">Tentang Proyek Ini</h1>
         <p className="text-sm text-gray-500 mt-1">
-          Combining AES encryption and EOF steganography to protect digital image copyrights.
+          Menggabungkan enkripsi AES dan steganografi EOF untuk melindungi hak cipta gambar digital.
         </p>
       </div>
 
-      <section className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 space-y-3">
-        <h2 className="font-semibold text-gray-900">AES Encryption</h2>
-        <p className="text-sm text-gray-600 leading-relaxed">
-          Advanced Encryption Standard (AES) is a symmetric encryption algorithm used worldwide
-          to secure sensitive data. It encrypts copyright information using a secret key provided
-          by the user, ensuring that only someone with the correct key can read the embedded data.
-        </p>
-      </section>
+      <div className="grid sm:grid-cols-2 gap-4">
+        <section className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 space-y-3">
+          <h2 className="font-semibold text-gray-900">Enkripsi AES</h2>
+          <p className="text-sm text-gray-600 leading-relaxed">
+            Advanced Encryption Standard (AES) adalah algoritma enkripsi simetris yang digunakan
+            secara global untuk mengamankan data sensitif. Algoritma ini mengenkripsi informasi
+            hak cipta menggunakan kunci rahasia yang diberikan oleh pengguna, memastikan hanya
+            pemilik kunci yang benar dapat membaca data yang tersisip.
+          </p>
+        </section>
+
+        <section className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 space-y-3">
+          <h2 className="font-semibold text-gray-900">Steganografi EOF</h2>
+          <p className="text-sm text-gray-600 leading-relaxed">
+            Steganografi End-of-File (EOF) bekerja dengan menambahkan data setelah akhir logis
+            file. Penampil gambar mengabaikan data di luar akhir file yang diharapkan, sehingga
+            tampilan visual tetap tidak berubah. Teknik ini memungkinkan data hak cipta
+            terenkripsi disembunyikan di dalam gambar JPEG dan PNG tanpa perubahan yang terlihat.
+          </p>
+        </section>
+      </div>
 
       <section className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 space-y-3">
-        <h2 className="font-semibold text-gray-900">EOF Steganography</h2>
-        <p className="text-sm text-gray-600 leading-relaxed">
-          End-of-File (EOF) steganography works by appending data after a file's logical end.
-          Image viewers ignore data past the expected end of the file, so the visual appearance
-          remains unchanged. This technique allows encrypted copyright data to be hidden inside
-          standard JPEG and PNG images without perceptible difference.
-        </p>
-      </section>
-
-      <section className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 space-y-3">
-        <h2 className="font-semibold text-gray-900">How It Works</h2>
+        <h2 className="font-semibold text-gray-900">Cara Kerja</h2>
         <ol className="list-decimal list-inside text-sm text-gray-600 space-y-2 leading-relaxed">
-          <li>Your copyright information (owner name, ID, description) is converted to JSON.</li>
-          <li>The JSON data is encrypted using AES with your secret key.</li>
-          <li>The encrypted ciphertext is appended to the end of the image file.</li>
-          <li>To verify, the appended data is extracted and decrypted using the same key.</li>
+          <li>Informasi hak cipta (nama pemilik, ID, deskripsi) diubah menjadi format JSON.</li>
+          <li>Data JSON dienkripsi menggunakan AES dengan kunci rahasia Anda.</li>
+          <li>Teks terenkripsi ditambahkan ke akhir file gambar.</li>
+          <li>Untuk verifikasi, data yang ditambahkan diekstrak dan didekripsi menggunakan kunci yang sama.</li>
         </ol>
       </section>
 
       <section className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 space-y-3">
-        <h2 className="font-semibold text-gray-900">Limitations</h2>
+        <h2 className="font-semibold text-gray-900">Keterbatasan</h2>
         <ul className="list-disc list-inside text-sm text-gray-600 space-y-1 leading-relaxed">
-          <li>Image recompression may remove the embedded data.</li>
-          <li>File size increases by the amount of appended data (typically a few hundred bytes).</li>
-          <li>Extreme file manipulation can destroy the hidden data.</li>
+          <li>Kompresi ulang gambar dapat menghilangkan data yang tersisip.</li>
+          <li>Ukuran file bertambah sebesar data yang ditambahkan (biasanya beberapa ratus byte).</li>
+          <li>Manipulasi file yang ekstrem dapat merusak data yang disembunyikan.</li>
         </ul>
       </section>
     </div>

@@ -12,3 +12,7 @@
   --color-cyan-800: #155e75;
   --color-cyan-900: #164e63;
 }
+
+body {
+  background: linear-gradient(135deg, #f0fdfa 0%, #ecfeff 50%, #f0f9ff 100%);
+}

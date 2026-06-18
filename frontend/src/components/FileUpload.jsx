@@ -8,7 +8,7 @@ export default function FileUpload({ onFile }) {
   function handleFile(file) {
     if (!file) return;
     if (!['image/jpeg', 'image/jpg', 'image/png'].includes(file.type)) {
-      alert('Only JPG, JPEG, and PNG files are allowed');
+      alert('Hanya file JPG, JPEG, dan PNG yang diperbolehkan');
       return;
     }
     onFile(file);
@@ -45,8 +45,8 @@ export default function FileUpload({ onFile }) {
 
       {preview ? (
         <div className="space-y-3">
-          <img src={preview} alt="Preview" className="max-h-64 mx-auto rounded-lg shadow-sm" />
-          <p className="text-sm text-gray-500">Click or drop to replace</p>
+          <img src={preview} alt="Pratinjau" className="max-h-64 mx-auto rounded-lg shadow-sm" />
+          <p className="text-sm text-gray-500">Klik atau seret untuk mengganti</p>
         </div>
       ) : (
         <div className="space-y-2">
@@ -54,9 +54,9 @@ export default function FileUpload({ onFile }) {
             <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5" />
           </svg>
           <p className="text-sm text-gray-600">
-            <span className="text-cyan-600 font-medium">Click to upload</span> or drag and drop
+            <span className="text-cyan-600 font-medium">Klik untuk unggah</span> atau seret dan lepas
           </p>
-          <p className="text-xs text-gray-400">JPG, JPEG, or PNG &middot; Max 10 MB</p>
+          <p className="text-xs text-gray-400">JPG, JPEG, atau PNG &middot; Maks 10 MB</p>
         </div>
       )}
     </div>

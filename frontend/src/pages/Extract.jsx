@@ -14,8 +14,8 @@ export default function Extract() {
     setError(null);
     setResult(null);
 
-    if (!file) { setError('Please select an image'); return; }
-    if (!secretKey) { setError('Secret Key is required'); return; }
+    if (!file) { setError('Pilih gambar terlebih dahulu'); return; }
+    if (!secretKey) { setError('Kunci rahasia wajib diisi'); return; }
 
     setLoading(true);
     try {
@@ -37,10 +37,10 @@ export default function Extract() {
 
   return (
     <div className="max-w-xl mx-auto space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold text-gray-900">Extract Copyright</h1>
+      <div className="text-center sm:text-left">
+        <h1 className="text-2xl font-bold text-gray-900">Ekstrak Hak Cipta</h1>
         <p className="text-sm text-gray-500 mt-1">
-          Upload a protected image and provide the secret key to retrieve the copyright information.
+          Unggah gambar yang telah dilindungi dan masukkan kunci rahasia untuk mengambil data hak cipta.
         </p>
       </div>
 
@@ -49,7 +49,7 @@ export default function Extract() {
 
         <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
           <label className="block text-sm font-medium text-gray-700 mb-1">
-            Secret Key <span className="text-red-400">*</span>
+            Kunci Rahasia <span className="text-red-400">*</span>
           </label>
           <input
             type="password"
@@ -67,12 +67,12 @@ export default function Extract() {
 
         {result && (
           <div className="bg-green-50 border border-green-200 rounded-lg px-4 py-4 text-sm text-green-800 space-y-2">
-            <p className="font-semibold">Copyright Data Retrieved</p>
+            <p className="font-semibold">Data Hak Cipta Ditemukan</p>
             <div className="space-y-1">
-              <p><span className="font-medium">Owner:</span> {result.owner_name}</p>
-              <p><span className="font-medium">Copyright ID:</span> {result.copyright_id}</p>
-              <p><span className="font-medium">Description:</span> {result.description || '—'}</p>
-              <p><span className="font-medium">Created At:</span> {new Date(result.created_at).toLocaleString()}</p>
+              <p><span className="font-medium">Pemilik:</span> {result.owner_name}</p>
+              <p><span className="font-medium">ID Hak Cipta:</span> {result.copyright_id}</p>
+              <p><span className="font-medium">Deskripsi:</span> {result.description || '—'}</p>
+              <p><span className="font-medium">Dibuat Pada:</span> {new Date(result.created_at).toLocaleString('id-ID')}</p>
             </div>
           </div>
         )}
@@ -80,9 +80,9 @@ export default function Extract() {
         <button
           type="submit"
           disabled={loading}
-          className="w-full rounded-lg bg-cyan-500 text-white font-medium py-2.5 text-sm hover:bg-cyan-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          className="w-full rounded-lg bg-cyan-500 text-white font-medium py-2.5 text-sm hover:bg-cyan-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors shadow-sm"
         >
-          {loading ? 'Processing...' : 'Extract Copyright'}
+          {loading ? 'Memproses...' : 'Ekstrak Hak Cipta'}
         </button>
       </form>
     </div>
