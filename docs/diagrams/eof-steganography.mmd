@@ -1,0 +1,27 @@
+flowchart LR
+    subgraph Before["Sebelum Embedding (gambar asli)"]
+        B1["┌──────────────────────┐
+│                      │
+│   File Image Bytes   │
+│   (JPEG / PNG)       │
+│                      │
+└──────────────────────┘"]
+    end
+
+    subgraph After["Sesudah Embedding (gambar terproteksi)"]
+        A1["┌──────────────────────┐
+│                      │
+│   File Image Bytes   │
+│   (tidak berubah)    │
+│                      │
+├──────────────────────┤
+│   __EOF_DATA__       │
+│   (marker 12 byte)   │
+├──────────────────────┤
+│   Encrypted JSON     │
+│   {ciphertext, iv}   │
+│                      │
+└──────────────────────┘"]
+    end
+
+    Before -->|"Proses Embedding\nappend data ke akhir file"| After

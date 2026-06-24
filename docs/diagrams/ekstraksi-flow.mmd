@@ -1,0 +1,27 @@
+flowchart TD
+    A([Mulai]) --> B[Input: file gambar\nyang sudah diproteksi,\nsecret_key]
+    
+    B --> C[Layer 1: Ekstraksi EOF]
+    C --> C1[Baca file sebagai buffer]
+    C1 --> C2[Cari marker __EOF_DATA__\ndari akhir file]
+    C2 --> D{Marker\nditemukan?}
+    D -->|Ya| E[Ambil data JSON\nsetelah marker]
+    
+    D -->|Tidak| F[Layer 2: Ekstraksi Metadata]
+    F --> F1{Format gambar?}
+    F1 -->|JPEG| F2[Cari COM marker\n0xFF 0xFE terakhir\nsebelum EOI]
+    F1 -->|PNG| F3[Cari tEXt chunk\ndengan keyword DigiMark]
+    
+    F2 --> G{Data\nditemukan?}
+    F3 --> G
+    G -->|Ya| E
+    G -->|Tidak| H[Tampilkan error:\nTidak ada data tersembunyi\ndi gambar]
+    
+    E --> I[Dekripsi AES-256\nCryptoJS.AES.decrypt\nciphertext + secret_key]
+    I --> J{Decrypt\nberhasil?}
+    J -->|Ya| K[Tampilkan data copyright:\n- Pemilik\n- ID Hak Cipta\n- Deskripsi\n- Waktu dibuat]
+    J -->|Tidak| L[Tampilkan error:\nKunci rahasia salah\natau data rusak]
+    
+    H --> M([Selesai])
+    K --> M
+    L --> M

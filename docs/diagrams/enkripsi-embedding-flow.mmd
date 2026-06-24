@@ -1,0 +1,17 @@
+flowchart TD
+    A([Mulai]) --> B[Input: file gambar,\nowner_name, copyright_id,\ndescription, secret_key]
+    B --> C[Buat objek copyrightData:\n{ owner_name, copyright_id,\n  description, created_at }]
+    C --> D[Enkripsi dengan AES-256\nCryptoJS.AES.encrypt\nkey = secret_key]
+    D --> E[Hasil enkripsi:\n{ ciphertext, iv }]
+    
+    E --> F[Layer 1: EOF Embedding]
+    F --> F1[Buat payload:\n__EOF_DATA__ + JSON.stringify({ciphertext, iv})]
+    F1 --> F2[Gabung: buffer gambar + payload\ntulis ke file output]
+    
+    F2 --> G[Layer 2: Metadata Embedding\n(backup/fallback)]
+    G --> H{Format gambar?}
+    H -->|JPEG / JPG| I[Sisipkan data di COM marker\n0xFF 0xFE sebelum marker EOI\n0xFF 0xD9]
+    H -->|PNG| J[Sisipkan data di tEXt chunk\ndengan keyword DigiMark\nsebelum chunk IEND]
+    
+    I --> K([Selesai: output gambar terproteksi])
+    J --> K
